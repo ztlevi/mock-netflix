@@ -1,0 +1,5 @@
+.Movie-row {
+  display: flex;
+  flex-direction: row;
+  height: 290px;
+}
