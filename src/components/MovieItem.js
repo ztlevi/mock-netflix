@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { removeFromMyList, addToMyList } from '../actions';
 import { connect } from 'react-redux';
+import ReactHoverObserver from 'react-hover-observer';
 import './MovieItem.css';
 
 class MovieItem extends Component {
@@ -10,17 +11,6 @@ class MovieItem extends Component {
       isMouseHover: false,
     };
   }
-  onMouseEnterHandler = event => {
-    this.setState({
-      isMouseHover: true,
-    });
-  };
-
-  onMouseLeaveHandler = event => {
-    this.setState({
-      isMouseHover: false,
-    });
-  };
   handleClick = event => {
     if (this.props.removeFromMyList != null) {
       this.props.removeFromMyList(this.props.movie);
@@ -31,16 +21,25 @@ class MovieItem extends Component {
   render() {
     const { movie, type } = this.props;
     return (
-      <div
-        className="Movie-item"
-        onMouseEnter={this.onMouseEnterHandler}
-        onMouseLeave={this.onMouseLeaveHandler}
-      >
-        <img src={movie.img} alt={movie.title} />
-        {this.state.isMouseHover ? (
-          <button onClick={this.handleClick}>{type === 'mylist' ? 'Remove' : 'Add'}</button>
-        ) : null}
+      <div>
+        <ReactHoverObserver className="Movie-item">
+          <img src={movie.img} alt={movie.title} />
+          <Button handleClick={this.handleClick} type={type} />
+        </ReactHoverObserver>
       </div>
+    );
+  }
+}
+class Button extends Component {
+  render() {
+    return (
+      <Fragment>
+        {this.props.isHovering ? (
+          <button onClick={this.props.handleClick}>
+            {this.props.type === 'mylist' ? 'Remove' : 'Add'}{' '}
+          </button>
+        ) : null}
+      </Fragment>
     );
   }
 }
