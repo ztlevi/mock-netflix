@@ -1,28 +1,25 @@
-import initialState from '../testData/data.json';
+// import initialState from '../testData/data.json';
 import _cloneDeep from 'lodash/cloneDeep';
 
+const initialState = {
+  mylist: [],
+  recommendations: [],
+};
 const movielists = (state = initialState, action) => {
   let newState = _cloneDeep(state);
 
   switch (action.type) {
+    case 'DATA_FETCHED':
+      newState.mylist = action.data.mylist;
+      newState.recommendations = action.data.recommendations;
+      break;
     case 'ADD_TO_MYLIST':
-      let isDuplicateItem = false;
-      for (let key in newState.mylist) {
-        let movie = newState.mylist[key];
-
-        if (movie.id === action.movie.id) {
-          isDuplicateItem = true;
-          break;
-        }
-      }
-      if (!isDuplicateItem) {
-        newState.mylist.push(action.movie);
-      } else {
-        alert('Duplicated item added!');
-      }
+      newState.recommendations = newState.recommendations.filter(el => el.id !== action.movie.id);
+      newState.mylist.push(action.movie);
       break;
     case 'REMOVE_FROM_MYLIST':
       newState.mylist = newState.mylist.filter(el => el.id !== action.movie.id);
+      newState.recommendations.push(action.movie);
       break;
     default:
       break;

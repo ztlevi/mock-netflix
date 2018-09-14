@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { removeFromMyList, addToMyList } from '../actions';
 import { connect } from 'react-redux';
 import ReactHoverObserver from 'react-hover-observer';
-import './MovieItem.css';
+import { Grid, Button } from '@material-ui/core';
 
 class MovieItem extends Component {
   constructor(props) {
@@ -21,23 +21,30 @@ class MovieItem extends Component {
   render() {
     const { movie, type } = this.props;
     return (
-      <div>
-        <ReactHoverObserver className="Movie-item">
-          <img src={movie.img} alt={movie.title} />
-          <Button handleClick={this.handleClick} type={type} />
-        </ReactHoverObserver>
-      </div>
+      <ReactHoverObserver>
+        <img src={movie.img} alt={movie.title} style={{ height: 233, width: 166 }} />
+        <HiddenButton handleClick={this.handleClick} type={type} />
+      </ReactHoverObserver>
     );
   }
 }
-class Button extends Component {
+class HiddenButton extends Component {
   render() {
     return (
       <Fragment>
         {this.props.isHovering ? (
-          <button onClick={this.props.handleClick}>
-            {this.props.type === 'mylist' ? 'Remove' : 'Add'}{' '}
-          </button>
+          <Button
+            onClick={this.props.handleClick}
+            style={{
+              backgroundColor: this.props.type === 'mylist' ? '#e74c3c' : '#3498db',
+              color: 'white',
+              marginTop: 5,
+              width: 166,
+              margin: 'auto',
+            }}
+          >
+            {this.props.type === 'mylist' ? 'Remove' : 'Add'}
+          </Button>
         ) : null}
       </Fragment>
     );

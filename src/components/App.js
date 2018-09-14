@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import GridRows from './GridRows';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Netflix App</h1>
-        </header>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Mock Netflix App
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <GridRows />
       </div>
     );

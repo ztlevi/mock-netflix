@@ -1,22 +1,50 @@
 import React, { Component } from 'react';
+import { fetchData } from '../actions';
 import MovieRow from './MovieRow';
-import './GridRows.css';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Grid, withStyles } from '@material-ui/core';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    margin: 10,
+    textAlign: 'center',
+    // color: theme.palette.text.secondary,
+    color: 'blue',
+  },
+  movieTitle: {
+    position: 'absolute',
+    bottom: 0,
+  },
+});
 
 class GridRows extends Component {
+  componentDidMount() {
+    this.props.fetchData();
+  }
   render() {
+    const { classes } = this.props;
     return (
-      <div className="Movie-row-container">
-        <MovieRow movielists={this.props.movielists} type="mylist" />
-        <MovieRow movielists={this.props.movielists} type="recommendations" />
-        <div className="Movie-titles">
-          {this.props.movielists.mylist.map(movie => (
-            <span key={movie.id} style={{ margin: 10 }}>
-              {movie.title}
-            </span>
-          ))}
-        </div>
-      </div>
+      <Grid container spacing={24}>
+        <Grid item xs={false} md={2} />
+        <Grid item xs={12} md={8}>
+          <MovieRow movielists={this.props.movielists} type="mylist" />
+          <MovieRow movielists={this.props.movielists} type="recommendations" />
+          <div className={classes.movieTitle}>
+            <h4 style={{ textAlign: 'left', marginLeft: 10 }}>mylist:</h4>
+            {this.props.movielists.mylist &&
+              this.props.movielists.mylist.map(movie => (
+                <span key={movie.id} style={{ margin: 10 }}>
+                  {movie.title}
+                </span>
+              ))}
+          </div>
+        </Grid>
+      </Grid>
     );
   }
 }
@@ -24,5 +52,14 @@ class GridRows extends Component {
 const mapStateToProps = state => ({
   movielists: state.movielists,
 });
+const mapDispatchToProps = dispatch => ({
+  fetchData: () => dispatch(fetchData(dispatch)),
+});
 
-export default connect(mapStateToProps)(GridRows);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(GridRows);
