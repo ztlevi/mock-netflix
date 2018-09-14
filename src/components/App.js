@@ -1,7 +1,7 @@
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import React, { Component } from 'react';
 import './App.css';
 import GridRows from './GridRows';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 class App extends Component {
   render() {

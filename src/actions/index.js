@@ -8,18 +8,16 @@ export const removeFromMyList = movie => ({
   movie,
 });
 
-export const fetchData = dispatch => {
-  return dispatch => {
-    return fetch('data.json')
-      .then(res => res.json())
-      .then(res => {
-        dispatch({
-          type: 'DATA_FETCHED',
-          data: res,
-        });
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-};
+export const startFetchData = () => ({
+  type: 'FETCH_REQUESTED',
+});
+
+export const fetchDataSuccess = data => ({
+  type: 'FETCH_DATA_SUCCESS',
+  data,
+});
+
+export const fetchDataFailed = e => ({
+  type: 'FETCH_DATA_FAILED',
+  e,
+});

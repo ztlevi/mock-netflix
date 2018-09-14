@@ -1,6 +1,6 @@
+import { GridList, GridListTile, Paper, withStyles } from '@material-ui/core';
 import React, { Component, Fragment } from 'react';
 import MovieItem from './MovieItem';
-import { GridList, GridListTile, Paper, withStyles } from '@material-ui/core';
 const styles = theme => ({
   paper: {
     padding: theme.spacing.unit,

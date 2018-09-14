@@ -1,8 +1,8 @@
+import { Button } from '@material-ui/core';
 import React, { Component, Fragment } from 'react';
-import { removeFromMyList, addToMyList } from '../actions';
-import { connect } from 'react-redux';
 import ReactHoverObserver from 'react-hover-observer';
-import { Grid, Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { addToMyList, removeFromMyList } from '../actions';
 
 class MovieItem extends Component {
   constructor(props) {

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { fetchData } from '../actions';
-import MovieRow from './MovieRow';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { Grid, withStyles } from '@material-ui/core';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+
+import { startFetchData } from '../actions';
+import MovieRow from './MovieRow';
 
 const styles = theme => ({
   root: {
@@ -24,10 +25,9 @@ const styles = theme => ({
 
 class GridRows extends Component {
   componentDidMount() {
-    this.props.fetchData();
+    this.props.startFetchData();
   }
   render() {
-    const { classes } = this.props;
     return (
       <Grid container spacing={24}>
         <Grid item xs={false} md={2} />
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
   movielists: state.movielists,
 });
 const mapDispatchToProps = dispatch => ({
-  fetchData: () => dispatch(fetchData(dispatch)),
+  startFetchData: () => dispatch(startFetchData()),
 });
 
 export default compose(
