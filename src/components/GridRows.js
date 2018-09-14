@@ -34,15 +34,13 @@ class GridRows extends Component {
         <Grid item xs={12} md={8}>
           <MovieRow movielists={this.props.movielists} type="mylist" />
           <MovieRow movielists={this.props.movielists} type="recommendations" />
-          <div className={classes.movieTitle}>
-            <h4 style={{ textAlign: 'left', marginLeft: 10 }}>mylist:</h4>
-            {this.props.movielists.mylist &&
-              this.props.movielists.mylist.map(movie => (
-                <span key={movie.id} style={{ margin: 10 }}>
-                  {movie.title}
-                </span>
-              ))}
-          </div>
+          <h2 style={{ textAlign: 'center', marginLeft: 10 }}>MYLIST TITLES</h2>
+          {this.props.movielists.mylist &&
+            this.props.movielists.mylist.map(movie => (
+              <span key={movie.id} style={{ margin: 10 }}>
+                {movie.title}
+              </span>
+            ))}
         </Grid>
       </Grid>
     );
