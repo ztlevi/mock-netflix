@@ -17,6 +17,9 @@ export const fetchData = dispatch => {
           type: 'DATA_FETCHED',
           data: res,
         });
+      })
+      .catch(e => {
+        console.log(e);
       });
   };
 };
