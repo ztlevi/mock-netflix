@@ -1,4 +1,3 @@
-// import initialState from '../testData/data.json';
 import _cloneDeep from 'lodash/cloneDeep';
 
 const initialState = {

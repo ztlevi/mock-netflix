@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+
 import { fetchDataFailed, fetchDataSuccess } from '../actions';
 
 function* fetchData() {
@@ -11,4 +12,7 @@ function* fetchData() {
   }
 }
 
-export default [takeEvery('FETCH_REQUESTED', fetchData)];
+function* watchFetchData() {
+  yield takeEvery('FETCH_REQUESTED', fetchData);
+}
+export default [watchFetchData()];
