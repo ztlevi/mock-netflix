@@ -8,8 +8,11 @@ export const removeFromMyList = movie => ({
   movie,
 });
 
-export const startFetchData = () => ({
+export const startFetchData = link => ({
   type: 'FETCH_REQUESTED',
+  payload: {
+    link,
+  },
 });
 
 export const fetchDataSuccess = data => ({

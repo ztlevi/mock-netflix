@@ -25,7 +25,7 @@ const styles = theme => ({
 
 class GridRows extends Component {
   componentDidMount() {
-    this.props.startFetchData();
+    this.props.startFetchData('data.json');
   }
   render() {
     return (
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
   movielists: state.movielists,
 });
 const mapDispatchToProps = dispatch => ({
-  startFetchData: () => dispatch(startFetchData()),
+  startFetchData: link => dispatch(startFetchData(link)),
 });
 
 export default compose(
